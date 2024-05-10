@@ -88,3 +88,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+Easy/.DS_Store
+Leetcode/.DS_Store
+.DS_Store

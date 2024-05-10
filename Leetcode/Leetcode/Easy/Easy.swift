@@ -10,8 +10,9 @@ import Foundation
 class Easy {
     
     static func start() {
-        let twoSum = TwoSum()
-        print(twoSum.twoSum([1,2,4,5], 3))
+        let twoSum = ValidPalindrome()
+
+        print(twoSum.isPalindrome("race a car"))
     }
     
     // MARK: - 1. Two Sum
@@ -833,8 +834,65 @@ class Easy {
             return result
         }
     }
-    
-    // MARK: - 136. Single Number
+
+  // MARK: - 125. Valid Palindrome
+  struct ValidPalindrome {
+    /*
+     A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+     Given a string s, return true if it is a palindrome, or false otherwise.
+
+
+
+     Example 1:
+
+     Input: s = "A man, a plan, a canal: Panama"
+     Output: true
+     Explanation: "amanaplanacanalpanama" is a palindrome.
+     Example 2:
+
+     Input: s = "race a car"
+     Output: false
+     Explanation: "raceacar" is not a palindrome.
+     Example 3:
+
+     Input: s = " "
+     Output: true
+     Explanation: s is an empty string "" after removing non-alphanumeric characters.
+     Since an empty string reads the same forward and backward, it is a palindrome.
+     */
+
+    func isPalindrome(_ s: String) -> Bool {
+      guard !s.isEmpty else { return true }
+
+      let lowerCaseString = Array(s.lowercased())
+      var start = 0
+      var end = s.count-1
+      while end >= start {
+        if !lowerCaseString[start].isLetter, !lowerCaseString[start].isNumber {
+          start += 1
+          continue
+        }
+
+        if !lowerCaseString[end].isLetter, !lowerCaseString[end].isNumber {
+          end -= 1
+          continue
+        }
+
+        if lowerCaseString[start] == lowerCaseString[end] {
+          start += 1
+          end -= 1
+        } else {
+          print("first false")
+          return false
+        }
+
+      }
+      return true
+    }
+  }
+
+  // MARK: - 136. Single Number
 
     struct SingleNumber {
         /*
@@ -983,7 +1041,7 @@ class Easy {
 
         func reverseList(_ head: ListNode?) -> ListNode? {
             guard let root = head,
-                  var rhs = root.next else {
+                  let rhs = root.next else {
                 return head
             }
             let node = reverseList(rhs)
@@ -1086,10 +1144,10 @@ class Easy {
          */
 
         func missingNumber(_ nums: [Int]) -> Int {
-            var start = 0
-            var end = nums.count
-            var range = start...end
-            var arr = Array(range)
+            let start = 0
+            let end = nums.count
+            let range = start...end
+            let arr = Array(range)
             let set1 = Set(arr)
             let set2 = Set(nums)
             let subtr = set1.subtracting(set2)
@@ -1109,7 +1167,7 @@ class Easy {
             return nums.count - diff
         }
         func missingNumber3(_ nums: [Int]) -> Int {
-            var missingNum = nums.reduce(0, ^)
+            let missingNum = nums.reduce(0, ^)
             print(missingNum)
             return (0...nums.count).reduce(missingNum, ^)
         }
